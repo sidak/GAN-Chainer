@@ -35,7 +35,7 @@ parameters.BATCH_SIZE = 100
 parameters.PREPROCESSED_DATA_FILE = constants.CURRENT_WORKING_DIRECTORY  + "/preprocessed_cifar10.npy"
 parameters.IMAGE_SAVING_INTERVAL = 1000
 parameters.GPU_ID = 21
-
+parameters.SAVED_ZVIS = "zvis.npy"
 
 def mkdir(path):
     try:
@@ -222,13 +222,16 @@ def train_mattya_gan(gen, disc, epoch_idx_done_before=-1):
         serializers.load_hdf5(serialized_model_dir+"/dcgan_model_dis_epoch=" + str(epoch_idx_done_before) + ".h5", dis)
         serializers.load_hdf5(serialized_model_dir+"/dcgan_state_dis_epoch=" + str(epoch_idx_done_before) + ".h5", o_dis)
         constants.CURRENT_WORKING_DIRECTORY += "/" + prev_exp_dir
-
+        zvis_file = constants.CURRENT_WORKING_DIRECTORY +  parameters.SAVED_ZVIS
+        zvis = np.load(zvis_file)
     else:    
         
         timestamp = util.get_current_time_stamp()
         constants.CURRENT_WORKING_DIRECTORY += "/Exp_" + timestamp
-        
-    zvis = xp.random.uniform(-1, 1, (parameters.NSAMPLES, parameters.NZ)).astype(np.float32)
+        mkdir(constants.CURRENT_WORKING_DIRECTORY)
+        zvis = xp.random.uniform(-1, 1, (parameters.NSAMPLES, parameters.NZ)).astype(np.float32)
+        zvis_file = constants.CURRENT_WORKING_DIRECTORY + "/" + parameters.SAVED_ZVIS
+        np.save(zvis_file, zvis)
 
     preprocessed_data_path = parameters.PREPROCESSED_DATA_FILE
 
