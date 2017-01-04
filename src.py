@@ -90,7 +90,7 @@ def visualize_cifar10_images(zvis, img_name):
 
     X/=X.max()
 
-    visualize_image_grid(X, 4, 4, 16, 16, img_name)
+    visualize_image_grid(X, 4, 4, 16, 16, img_name) 
 
 
 def visualize_image_grid(inp, n_rows, n_cols, fig_width, fig_height, img_name):
@@ -222,7 +222,7 @@ def train_mattya_gan(gen, disc, epoch_idx_done_before=-1):
         serializers.load_hdf5(serialized_model_dir+"/dcgan_model_dis_epoch=" + str(epoch_idx_done_before) + ".h5", dis)
         serializers.load_hdf5(serialized_model_dir+"/dcgan_state_dis_epoch=" + str(epoch_idx_done_before) + ".h5", o_dis)
         constants.CURRENT_WORKING_DIRECTORY += "/" + prev_exp_dir
-        zvis_file = constants.CURRENT_WORKING_DIRECTORY +  parameters.SAVED_ZVIS
+        zvis_file = constants.CURRENT_WORKING_DIRECTORY + "/" +  parameters.SAVED_ZVIS
         zvis = np.load(zvis_file)
     else:    
         
