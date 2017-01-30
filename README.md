@@ -12,6 +12,14 @@ The GANs framework details an indirect approach to learning Generative Models, r
 formulating such a loss function is a hard problem in itself). Considering that we take these models to be Multi-layer Neural Networks,
 the generator network is pitted against a discriminator network. 
 
+## Designing the Generator Network
+The architecture of the generator network is inspired from the DCGAN paper. The main guidelines that are followed are:
+
+1. All convolutional network: replace pooling by strided convolutions. 
+2. No fully connected layers at the end.
+3. Applying Batch-Normalization.
+4. Using ReLU activation except Tanh for the output layer.
+
 --- TO BE CONTINUED ---
 
 
